@@ -17,7 +17,13 @@
     (my-last (rest a-seq))))
 
 (defn max-element [a-seq]
-  :-)
+  (cond
+   (empty? a-seq)
+     nil
+   (empty? (rest a-seq))
+     (first a-seq)
+   :else
+     (max (first a-seq) (max-element (rest a-seq)))))
 
 (defn seq-max [seq-1 seq-2]
   (if (> (count seq-1) (count seq-2))
@@ -92,16 +98,25 @@
     :else (+ (fib (- n 1)) (fib (- n 2)))))
 
 (defn my-repeat [how-many-times what-to-repeat]
-  [:-])
+  (if (>= 0 how-many-times)
+    ()
+    (cons what-to-repeat (my-repeat (dec how-many-times) what-to-repeat))))
 
 (defn my-range [up-to]
-  [:-])
+  (if (zero? up-to)
+    ()
+    (cons (dec up-to) (my-range (dec up-to)))))
 
 (defn tails [a-seq]
-  [:-])
+  (if (zero? (count a-seq))
+    '(())
+    (cons (seq a-seq) (tails (rest a-seq)))))
 
 (defn inits [a-seq]
-  [:-])
+  (let [a-seq (reverse a-seq)]
+  (if (empty? a-seq)
+    '(())
+    (cons (sort (seq a-seq)) (inits (reverse (rest a-seq)))))))
 
 (defn rotations [a-seq]
   [:-])
